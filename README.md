@@ -8,6 +8,6 @@ Quite a number of web apps built today are Single Page Apps (SPA.) With React, V
 
 One of the biggest challenge faced by SPAs is the diffculty in SEO (Search Engine Optimization.) Granted, most SPAs don't need to be indexed by search engines, But such demands have pushed the development of Universal Rendering, or Server-Side Rendering of frontend components. Universal Rendering does not come for free, developer now need to manage additional complexity of components lifecycles on both client-side and server-side. A more detailed discussion on the cost of Universal Rendering can be found on Meng Xuan Xia's article.
 
-## SSR-Proxy's solution to Universal Rendering
+## SSR-Proxy
 
-With SSR-Proxy, we take a different approach in Server-Side Rendering. 
+SSR-Proxy is a HTTP proxy which you can put in front of your existing SPA server. With SSR-Proxy, we take a different approach in Server-Side Rendering. Instead of rendering frontend components in Nodejs, we use an actual headless browser — PhantomJS to render SPA and proxy the rendered HTML to the client.
