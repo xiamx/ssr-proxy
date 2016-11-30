@@ -1,4 +1,4 @@
-#SSR-Proxy -- Server-Side Rendering Proxy.
+# SSR-Proxy — Server-Side Rendering Proxy
 
 Prerender your single page app for better SEO and support on legacy browsers
 
