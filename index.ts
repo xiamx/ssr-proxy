@@ -31,7 +31,7 @@ const shouldDirectProxy = (srvUrl: Url): boolean => {
 
 const shouldPhantomjsIgnore = (url: string) => {
     return !isEmpty(url.match(/\.ttf$/));
-}
+};
 
 const ssrProxy = async (req,  res) =>  {
     const instance = await phantom.create(config.phantomjs.argv);
