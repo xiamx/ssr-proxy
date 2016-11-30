@@ -30,46 +30,45 @@ const shouldDirectProxy = (srvUrl: Url): boolean => {
 }
 
 const ssrProxy = async (req,  res) =>  {
-        const instance = await phantom.create();
-        console.info("[SSR-Proxy] Request", req.url);
-        const debouncedWrite = debounce(() => {
-            page.property("content").then(content =>
-                res.end(content)
-            ).then(() => instance.exit());
-        }, config.idleMax);
+    const instance = await phantom.create();
+    console.info("[SSR-Proxy] Request", req.url);
+    const debouncedWrite = debounce(() => {
+        page.property("content").then(content =>
+            res.end(content)
+        ).then(() => instance.exit());
+    }, config.idleMax);
 
-        const srvUrl = url.parse(`http://${req.url}`);
+    const srvUrl = url.parse(`http://${req.url}`);
 
-        if (shouldDirectProxy(srvUrl)) {
-            console.info("[SSR-Proxy] Direct proxy", srvUrl.path);
-            return await proxy.web(req,  res,  { target: config.upstream });
+    if (shouldDirectProxy(srvUrl)) {
+        console.info("[SSR-Proxy] Direct proxy", srvUrl.path);
+        return await proxy.web(req,  res,  { target: config.upstream });
+    }
+
+    const page = await instance.createPage();
+    await page.on("onResourceRequested", (requestData) => {
+        console.info("[Phantom] Resource Requesting", requestData.id, requestData.url);
+        debouncedWrite();
+    });
+
+    await page.on("onResourceReceived", (requestData) => {
+        console.info("[Phantom] Resource Received", requestData.url);
+        if (requestData.id === 1) {
+            // this is the main document
+            let newheader = rewriteHeader(requestData.headers);
+            res.writeHead(requestData.status, newheader);
         }
+        debouncedWrite();
+    });
 
-        const page = await instance.createPage();
-        await page.on("onResourceRequested", (requestData) => {
-            console.info("[Phantom] Resource Requesting", requestData.id, requestData.url);
-            debouncedWrite();
-        });
+    await page.on("onResourceError", (requestData) => {
+        console.error("[Phantom] Resource Error", requestData.url, requestData.errorString);
+        debouncedWrite();
+    });
 
-        await page.on("onResourceReceived", (requestData) => {
-            console.info("[Phantom] Resource Received", requestData.url);
-            if (requestData.id === 1) {
-                // this is the main document
-                let newheader = rewriteHeader(requestData.headers);
-                res.writeHead(requestData.status, newheader);
-            }
-            debouncedWrite();
-        });
-
-        await page.on("onResourceError", (requestData) => {
-            console.error("[Phantom] Resource Error", requestData.url, requestData.errorString);
-            debouncedWrite();
-        });
-
-        const status = await page.open(url.resolve(config.upstream, srvUrl.path));
-        console.info("[Phantom] page open", status);
-
-    };
+    const status = await page.open(url.resolve(config.upstream, srvUrl.path));
+    console.info("[Phantom] page open", status);
+};
 
 (async function() {
     const server  =  http.createServer(ssrProxy);
