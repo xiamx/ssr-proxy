@@ -3,7 +3,16 @@ import * as httpProxy from "http-proxy";
 import * as http from "http";
 import * as url from "url";
 import { Url } from "url";
-import {chain, values, debounce, keyBy, mapValues, filter, omit, isEmpty} from "lodash";
+import {
+    chain,
+    values,
+    debounce,
+    keyBy,
+    mapValues,
+    filter,
+    omit,
+    isEmpty
+} from "lodash";
 
 const config = require("./config.json");
 const proxy = httpProxy.createProxyServer(config.nodeHttpProxy);
