@@ -4,5 +4,6 @@
     "nodeHttpProxy": {
         "toProxy": true,
         "changeOrigin": true
-    }
+    },
+    "port": 5050
 }
