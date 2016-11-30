@@ -5,5 +5,8 @@
         "toProxy": true,
         "changeOrigin": true
     },
+    "phantomjs": {
+        "argv": ["--load-images=false"]
+    },
     "port": 5050
 }

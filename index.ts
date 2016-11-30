@@ -26,11 +26,15 @@ const rewriteHeader = phantomRequestDataHeaders => {
 };
 
 const shouldDirectProxy = (srvUrl: Url): boolean => {
-    return !isEmpty(srvUrl.pathname.match(/.png$|.jpg$/));
+    return !isEmpty(srvUrl.pathname.match(/(\.png$)|(\.jpg$)|(\.ttf$)/));
 };
 
+const shouldPhantomjsIgnore = (url: string) => {
+    return !isEmpty(url.match(/\.ttf$/));
+}
+
 const ssrProxy = async (req,  res) =>  {
-    const instance = await phantom.create();
+    const instance = await phantom.create(config.phantomjs.argv);
     console.info("[SSR-Proxy] Request", req.url);
     const debouncedWrite = debounce(() => {
         page.property("content").then(content =>
@@ -46,7 +50,10 @@ const ssrProxy = async (req,  res) =>  {
     }
 
     const page = await instance.createPage();
-    await page.on("onResourceRequested", (requestData) => {
+    await page.on("onResourceRequested", true, function(requestData, networkRequest) {
+        if (shouldPhantomjsIgnore(networkRequest.url)) {
+            return networkRequest.abort();
+        }
         console.info("[Phantom] Resource Requesting", requestData.id, requestData.url);
         debouncedWrite();
     });
@@ -61,9 +68,11 @@ const ssrProxy = async (req,  res) =>  {
         debouncedWrite();
     });
 
-    await page.on("onResourceError", (requestData) => {
-        console.error("[Phantom] Resource Error", requestData.url, requestData.errorString);
-        debouncedWrite();
+    await page.on("onResourceError", true, function(requestData, networkRequest) {
+        if (!shouldPhantomjsIgnore(networkRequest.url)) {
+            console.error("[Phantom] Resource Error", requestData.url, requestData.errorString);
+            debouncedWrite();
+        }
     });
 
     const status = await page.open(url.resolve(config.upstream, srvUrl.path));
