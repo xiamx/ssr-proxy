@@ -26,8 +26,8 @@ const rewriteHeader = phantomRequestDataHeaders => {
 };
 
 const shouldDirectProxy = (srvUrl: Url): boolean => {
-    return !isEmpty(srvUrl.pathname.match(/.png$|.jpg$/))
-}
+    return !isEmpty(srvUrl.pathname.match(/.png$|.jpg$/));
+};
 
 const ssrProxy = async (req,  res) =>  {
     const instance = await phantom.create();
