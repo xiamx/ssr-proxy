@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>SSR-Proxy by xiamx</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/xiamx/ssr-proxy">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/xiamx/ssr-proxy/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/xiamx/ssr-proxy/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>SSR-Proxy</h1>
+          <p>Prerender your single page app for better SEO and support on legacy browsers</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/xiamx">xiamx</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a id="ssr-proxy--server-side-rendering-proxy" class="anchor" href="#ssr-proxy--server-side-rendering-proxy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SSR-Proxy — Server-Side Rendering Proxy</h1>
+
+<p>Prerender your single page app for better SEO and support on legacy browsers.</p>
+
+<p>SSR-Proxy is a HTTP proxy which you can put in front of your existing Single Page App server to achieve server-side rendering. With SSR-Proxy, we take a different approach in Server-Side Rendering. Instead of rendering frontend components in Nodejs, we use an actual headless browser — PhantomJS to render SPA and proxy the rendered HTML to the client. </p>
+
+<h2>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Demo</h2>
+
+<p>Directly accessing an async javascript rendered page</p>
+
+<p><img src="demo-direct.gif"></p>
+
+<p>Accessing an async javascript rendered page through SSR-Proxy</p>
+
+<p><img src="demo-ssr-proxy.gif"></p>
+
+<h2>
+<a id="get-started" class="anchor" href="#get-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Get started</h2>
+
+<p>Install Node.js with version 6.4.0 and higher. Then follow the steps below.</p>
+
+<div class="highlight highlight-source-shell"><pre>git clone git@github.com:xiamx/ssr-proxy.git
+<span class="pl-c1">cd</span> srr-proxy
+npm install
+<span class="pl-c"># make the configuration needed in config.json</span>
+<span class="pl-c"># change upstream to the server of your Single Page App</span>
+npm start</pre></div>
+
+<h2>
+<a id="motivation" class="anchor" href="#motivation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Motivation</h2>
+
+<p>Quite a number of web apps built today are Single Page Apps (SPA.) [<a href="https://github.com/search?o=desc&amp;q=require%28%27react-router%27%29&amp;ref=searchresults&amp;s=indexed&amp;type=Code&amp;utf8=%E2%9C%93">1</a>] With React, Vuejs and other tools, building complex SPA is easier than ever before. One of the biggest challenge faced by SPAs is the diffculty in SEO (Search Engine Optimization.) When a webpage is asynchronously rendered via javascript (e.g. use ajax to fetch some documents and then display it inside a div), search engines cannot index them properly [<a href="http://webcache.googleusercontent.com/search?q=cache:ypDo69X-oj0J:react.semantic-ui.com/&amp;num=1&amp;hl=en&amp;gl=ca&amp;strip=1&amp;vwsrc=0">2</a>, <a href="https://engineering.pinterest.com/blog/demystifying-seo-experiments">4</a>].</p>
+
+<p>Granted, most SPAs don't need to be indexed by search engines, But such demands have pushed the development of Universal Rendering, or Server-Side Rendering of frontend components. Universal Rendering does not come for free, developer now need to manage additional complexity of components lifecycles on both client-side and server-side. [<a href="http://jamesknelson.com/universal-react-youre-doing-it-wrong/">3</a>]</p>
+
+<p>With the approach offered by SSR-Proxy, we don't need code-level universal rendering. Hence, we can focus on developing a SPA that is designed to render in a browser, greatly reducing the complexity.</p>
+
+<h2>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p>SSR-Proxy ships with a default configuration in <code>config.json</code> which should be usable in most scenarios. But you might need to modify it to get the desired behavoir.</p>
+
+<ul>
+<li>
+<code>upstream</code>: The root url of your single page app. SSR-Proxy will proxy all requests to this url.</li>
+<li>
+<code>idleMax</code>: SSR-Proxy consider a page rendered and send it back to the client if there are no network activity for more than <code>idleMax</code> milliseconds. A default value of <code>500</code> is set. If your SPA server is slower than that or your page renders with partial content, you may consider increasing this number. Decreasing this number shortens the page loading time, at the cost of possible missing content.</li>
+<li>
+<code>nodeHttpProxy</code>: A set of <a href="https://github.com/nodejitsu/node-http-proxy#options">options</a> passed to when creating node-http-proxy server.</li>
+<li>
+<code>phantomjs.argv</code>: Commandline arguments when starting phantomjs.</li>
+<li>
+<code>port</code>: Port that this proxy server listens to.</li>
+</ul>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
