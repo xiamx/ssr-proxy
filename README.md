@@ -47,3 +47,5 @@ SSR-Proxy ships with a default configuration in `config.json` which should be us
 [1]: https://github.com/search?o=desc&q=require%28%27react-router%27%29&ref=searchresults&s=indexed&type=Code&utf8=%E2%9C%93
 
 [2]: http://webcache.googleusercontent.com/search?q=cache:ypDo69X-oj0J:react.semantic-ui.com/&num=1&hl=en&gl=ca&strip=1&vwsrc=0
+
+[3]: http://jamesknelson.com/universal-react-youre-doing-it-wrong/
