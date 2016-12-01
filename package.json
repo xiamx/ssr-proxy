@@ -1,13 +1,17 @@
 {
   "name": "ssr-proxy",
   "version": "1.0.0",
-  "description": "Server-side rendering proxy",
+  "description": "Server-Side Rendering Proxy - Prerender your single page app for better SEO and support on legacy browsers",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "node index",
-    "lint": "tslint index.ts"
+    "lint": "tslint index.ts",
+    "prepublish": "npm run build"
+  },
+  "repository" : {
+     "type" : "git",
+     "url" : "https://github.com/xiamx/ssr-proxy.git"
   },
   "author": "Mengxuan Xia <mengxuan.xia@outlook.com> (http://www.xiamx.me)",
   "license": "MIT",
