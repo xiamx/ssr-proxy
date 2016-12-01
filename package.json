@@ -4,10 +4,10 @@
   "description": "Server-Side Rendering Proxy - Prerender your single page app for better SEO and support on legacy browsers",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "node index",
-    "lint": "tslint index.ts"
+    "lint": "tslint index.ts",
+    "prepublish": "npm run build"
   },
   "repository" : {
      "type" : "git",
