@@ -2,6 +2,18 @@
 
 Prerender your single page app for better SEO and support on legacy browsers
 
+<figure style="width: 50%; float: left">
+<img src="demo-direct.gif"/>
+<figcaption>Directly accessing an async javascript rendered page</figcaption>
+</figure>
+<figure style="width: 50%; float: left">
+<img src="demo-ssr-proxy.gif"/>
+<figcaption>Accessing an async javascript rendered page through SSR-Proxy</figcaption>
+</figure>
+</figure>
+
+<div style="float: clear"></>
+
 ## Get started
 
 Install Node.js with version 6.4.0 and higher. Then follow the steps below.
