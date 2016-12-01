@@ -4,6 +4,7 @@
   "description": "Server-Side Rendering Proxy - Prerender your single page app for better SEO and support on legacy browsers",
   "main": "index.js",
   "scripts": {
+    "test": "npm run lint",
     "build": "tsc",
     "start": "node index",
     "lint": "tslint index.ts",
