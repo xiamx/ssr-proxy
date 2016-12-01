@@ -2,6 +2,8 @@
 
 Prerender your single page app for better SEO and support on legacy browsers
 
+## Demo
+
 Directly accessing an async javascript rendered page
 
 <img src="demo-direct.gif"/>
