@@ -12,7 +12,7 @@ Prerender your single page app for better SEO and support on legacy browsers
 </figure>
 </figure>
 
-<div style="float: clear"></>
+<div style="float: clear"></div>
 
 ## Get started
 
