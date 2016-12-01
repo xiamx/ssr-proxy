@@ -9,6 +9,10 @@
     "start": "node index",
     "lint": "tslint index.ts"
   },
+  "repository" : {
+     "type" : "git",
+     "url" : "https://github.com/xiamx/ssr-proxy.git"
+  },
   "author": "Mengxuan Xia <mengxuan.xia@outlook.com> (http://www.xiamx.me)",
   "license": "MIT",
   "devDependencies": {
