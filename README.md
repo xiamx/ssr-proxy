@@ -1,6 +1,8 @@
 # SSR-Proxy — Server-Side Rendering Proxy
 
-Prerender your single page app for better SEO and support on legacy browsers
+Prerender your single page app for better SEO and support on legacy browsers.
+
+SSR-Proxy is a HTTP proxy which you can put in front of your existing Single Page App server to achieve server-side rendering. With SSR-Proxy, we take a different approach in Server-Side Rendering. Instead of rendering frontend components in Nodejs, we use an actual headless browser — PhantomJS to render SPA and proxy the rendered HTML to the client. 
 
 ## Demo
 
@@ -26,15 +28,11 @@ npm start
 
 ## Motivation
 
-Quite a number of web apps built today are Single Page Apps (SPA.) [[1]] With React, Vuejs and other tools, building complex SPA is easier than ever before. One of the biggest challenge faced by SPAs is the diffculty in SEO (Search Engine Optimization.) When a webpage is asynchronously rendered via javascript (e.g. use ajax to fetch some documents and then display it inside a div), search engines cannot index them properly [[2]].
+Quite a number of web apps built today are Single Page Apps (SPA.) [[1]] With React, Vuejs and other tools, building complex SPA is easier than ever before. One of the biggest challenge faced by SPAs is the diffculty in SEO (Search Engine Optimization.) When a webpage is asynchronously rendered via javascript (e.g. use ajax to fetch some documents and then display it inside a div), search engines cannot index them properly [[2], [4]].
 
 Granted, most SPAs don't need to be indexed by search engines, But such demands have pushed the development of Universal Rendering, or Server-Side Rendering of frontend components. Universal Rendering does not come for free, developer now need to manage additional complexity of components lifecycles on both client-side and server-side. [[3]]
 
-## SSR-Proxy
-
-SSR-Proxy is a HTTP proxy which you can put in front of your existing SPA server. With SSR-Proxy, we take a different approach in Server-Side Rendering. Instead of rendering frontend components in Nodejs, we use an actual headless browser — PhantomJS to render SPA and proxy the rendered HTML to the client.
-
-With this approach, we can focus on developing a SPA that is designed to render in a browser, greatly reducing the complexity.
+With the approach offered by SSR-Proxy, we don't need code-level universal rendering. Hence, we can focus on developing a SPA that is designed to render in a browser, greatly reducing the complexity.
 
 ## Configuration
 
@@ -51,3 +49,5 @@ SSR-Proxy ships with a default configuration in `config.json` which should be us
 [2]: http://webcache.googleusercontent.com/search?q=cache:ypDo69X-oj0J:react.semantic-ui.com/&num=1&hl=en&gl=ca&strip=1&vwsrc=0
 
 [3]: http://jamesknelson.com/universal-react-youre-doing-it-wrong/
+
+[4]: https://engineering.pinterest.com/blog/demystifying-seo-experiments
