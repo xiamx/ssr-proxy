@@ -30,7 +30,7 @@ npm start
 
 Quite a number of web apps built today are Single Page Apps (SPA.) [[1]] With React, Vuejs and other tools, building complex SPA is easier than ever before. One of the biggest challenge faced by SPAs is the diffculty in SEO (Search Engine Optimization.) When a webpage is asynchronously rendered via javascript (e.g. use ajax to fetch some documents and then display it inside a div), search engines cannot index them properly [[2], [4]].
 
-Granted, most SPAs don't need to be indexed by search engines, But such demands have pushed the development of Universal Rendering, or Server-Side Rendering of frontend components. Universal Rendering does not come for free, developer now need to manage additional complexity of components lifecycles on both client-side and server-side. [[3]]
+Granted, most SPAs don't need to be indexed by search engines, But such demands have pushed the development of Universal Rendering, or Server-Side Rendering of frontend components. Universal Rendering does not come for free, developer now need to manage additional complexity of components lifecycles on both client-side and server-side. [[3]] [[5]]
 
 With the approach offered by SSR-Proxy, we don't need code-level universal rendering. Hence, we can focus on developing a SPA that is designed to render in a browser, greatly reducing the complexity.
 
@@ -51,3 +51,5 @@ SSR-Proxy ships with a default configuration in `config.json` which should be us
 [3]: http://jamesknelson.com/universal-react-youre-doing-it-wrong/
 
 [4]: https://engineering.pinterest.com/blog/demystifying-seo-experiments
+
+[5]: http://cs.mcgill.ca/~mxia3/2016/12/03/The-cost-of-Universal-Rendering/
