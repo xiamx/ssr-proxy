@@ -14,7 +14,7 @@ import {
     isEmpty
 } from "lodash";
 
-const config = require("./config.json");
+const config = require("../config.json");
 const proxy = httpProxy.createProxyServer(config.nodeHttpProxy);
 
 const rewriteHeader = phantomRequestDataHeaders => {
@@ -80,7 +80,7 @@ const ssrProxy = async (req,  res) =>  {
 };
 
 (async function() {
-    const server  =  http.createServer(ssrProxy);
+    const server = http.createServer(ssrProxy);
 
     console.info(`[SSR-Proxy] listening on port ${config.port}`);
     server.listen(config.port);
