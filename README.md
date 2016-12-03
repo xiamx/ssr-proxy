@@ -6,13 +6,9 @@ SSR-Proxy is a HTTP proxy which you can put in front of your existing Single Pag
 
 ## Demo
 
-Directly accessing an async javascript rendered page
+Directly accessing an async javascript rendered page vs. accessing an async javascript rendered page through SSR-Proxy
 
-<img src="demo-direct.gif"/>
-
-Accessing an async javascript rendered page through SSR-Proxy
-
-<img src="demo-ssr-proxy.gif"/>
+![demo](demo.gif)
 
 ## Get started
 
