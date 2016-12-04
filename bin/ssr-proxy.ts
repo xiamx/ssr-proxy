@@ -40,4 +40,4 @@ if (!argv.config && !argv.upstream) {
     const ssrp = new SSRProxy(argv.upstream, argv.idleMax, argv.nodeHttpProxy, argv.phantomjs);
     ssrp.listen(argv.port);
     console.info(`[SSR-Proxy] listening on port ${argv.port}`);
-})()
+})();
