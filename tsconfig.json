@@ -2,6 +2,7 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es6",
+        "newLine": "LF",
         "noImplicitAny": false,
         "sourceMap": false
     }

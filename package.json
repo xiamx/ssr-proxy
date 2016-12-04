@@ -10,9 +10,12 @@
     "lint": "tslint src/**/*.ts",
     "prepublish": "npm run build"
   },
-  "repository" : {
-     "type" : "git",
-     "url" : "https://github.com/xiamx/ssr-proxy.git"
+  "bin": {
+    "ssr-proxy": "./bin/ssr-proxy.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiamx/ssr-proxy.git"
   },
   "author": "Mengxuan Xia <mengxuan.xia@outlook.com> (http://www.xiamx.me)",
   "license": "MIT",
@@ -20,6 +23,7 @@
     "@types/lodash": "^4.14.41",
     "@types/node": "^6.0.51",
     "@types/phantom": "0.0.30",
+    "@types/yargs": "^6.3.3",
     "tslint": "^4.0.2",
     "typescript": "^2.0.10"
   },
@@ -27,6 +31,7 @@
     "http-proxy": "^1.15.2",
     "lodash": "^4.17.2",
     "lodash.debounce": "^4.0.8",
-    "phantom": "^3.2.0"
+    "phantom": "^3.2.0",
+    "yargs": "^6.5.0"
   }
 }

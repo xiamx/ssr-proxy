@@ -1,5 +1,5 @@
 {
-    "upstream": "http://react.semantic-ui.com",
+    "upstream": "http://react.semantic-ui.com/",
     "idleMax": 500,
     "nodeHttpProxy": {
         "toProxy": true,

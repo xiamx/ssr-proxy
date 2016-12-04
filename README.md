@@ -14,13 +14,24 @@ Directly accessing an async javascript rendered page vs. accessing an async java
 
 Install Node.js with version 6.4.0 and higher. Then follow the steps below.
 ```bash
-git clone git@github.com:xiamx/ssr-proxy.git
-cd srr-proxy
-npm install
-# make the configuration needed in config.json
-# change upstream to the server of your Single Page App
-npm start
+npm install -g ssr-proxy
 ```
+
+Then you can either invoke ssr-proxy using commandline params
+
+```bash
+ssr-proxy --upstream http://yoursinglepage.app.local
+```
+
+Or create and modify [config.json](config.json) with your desired configurations. The configuration parameters are explained in the section below.
+
+```bash
+ssr-proxy --config youconfig.json
+```
+
+Assuming you decide to keep the default proxy listening proxy port 5050, you can now access your ssr-proxy'ed SPA from [http://localhost:5050](http://localhost:5050).
+
+If you need to use ssr-proxy as a library, it's possible to `npm install --save ssr-proxy` in your local project. ssr-proxy exposes a single default class named [`SSRProxy`](src/index.ts).
 
 ## Motivation
 
