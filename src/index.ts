@@ -5,7 +5,6 @@ import * as url from "url";
 import { Url } from "url";
 import {
     chain,
-    values,
     debounce,
     keyBy,
     mapValues,
@@ -89,7 +88,7 @@ export default class SSRProxy {
             .keyBy("name")
             .mapValues("value")
             .omit(["Content-Encoding"])
-            .values();
+            .value();
     };
 
     static shouldDirectProxy(srvUrl: Url): boolean {
