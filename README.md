@@ -53,6 +53,18 @@ SSR-Proxy ships with a default configuration in `config.json` which should be us
 - `phantomjs.argv`: Commandline arguments when starting phantomjs.
 - `port`: Port that this proxy server listens to.
 
+## FAQ
+
+### What is the performance overhead?
+
+SSR-Proxy uses an adaptive timeout method to predict when a page is asynchronously loaded. That is -- when the requested page does not make network request for more than 500 ms (a configurable parameter named _idleMax_), ssr-proxy heuristically treats the page as being asynchronously rendered and send it to the client. So there is at least a minimal delay of _idleMax_ for each request. 
+
+For this reason, it is best to use ssr-proxy behind nginx configured to send only requests from a particular user-agent (i.e. googlebot, ancient browsers)
+
+### Does it cache rendered HTML?
+
+No, it is best to use another proxy with sophisticated caching mechanism in front of SSR-Proxy, such as nginx or squid.
+
 [1]: https://github.com/search?o=desc&q=require%28%27react-router%27%29&ref=searchresults&s=indexed&type=Code&utf8=%E2%9C%93
 
 [2]: http://webcache.googleusercontent.com/search?q=cache:ypDo69X-oj0J:react.semantic-ui.com/&num=1&hl=en&gl=ca&strip=1&vwsrc=0
@@ -62,3 +74,5 @@ SSR-Proxy ships with a default configuration in `config.json` which should be us
 [4]: https://engineering.pinterest.com/blog/demystifying-seo-experiments
 
 [5]: http://cs.mcgill.ca/~mxia3/2016/12/03/The-cost-of-Universal-Rendering/
+
+[prerender.io]: https://prerender.io/
