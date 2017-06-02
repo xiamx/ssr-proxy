@@ -1,5 +1,7 @@
 # SSR-Proxy — Server-Side Rendering Proxy
 
+[![Build Status](https://travis-ci.org/xiamx/ssr-proxy.svg?branch=master)](https://travis-ci.org/xiamx/ssr-proxy)
+
 Prerender your single page app for better SEO and support on legacy browsers.
 
 SSR-Proxy is a HTTP proxy which you can put in front of your existing Single Page App server to achieve server-side rendering. With SSR-Proxy, we take a different approach in Server-Side Rendering. Instead of rendering frontend components in Nodejs, we use an actual headless browser — PhantomJS to render SPA and proxy the rendered HTML to the client. 
